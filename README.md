@@ -8,4 +8,4 @@ Feel free to explore the different files and folders to learn more about the pro
 
 Happy coding!  
 
-Here is my Java practice exercise, if you find it and clone it, please give me a star.
+Here is my Java practice exercise, if you've found and cloned it, please give me a star.
