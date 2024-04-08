@@ -15,6 +15,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JCheckBox;
 
 // StudentDetail class
 public class StudentDetail extends JFrame {
@@ -24,10 +25,11 @@ public class StudentDetail extends JFrame {
     private JLabel genderLabel;
     private JLabel courseLabel;
     private JLabel facilitiesLabel;
+    private JLabel timeSlotLabel;
     private JTextField nameTextField;
     private JTextField ageTextField;
     private JTextArea addressTextArea;
-    private JComboBox<String> courseComboBox;
+    private JComboBox<String> courseComboBox, timeSlotComboBox;
     private JButton okButton;
     private JButton closeButton;
 
@@ -51,6 +53,7 @@ public class StudentDetail extends JFrame {
         addressLabel = new JLabel("Address:");
         genderLabel = new JLabel("Gender:");
         courseLabel = new JLabel("Course:");
+        timeSlotLabel = new JLabel("Time Slot:");
         facilitiesLabel = new JLabel("Facilities:");
         nameTextField = new JTextField();
         ageTextField = new JTextField();
@@ -60,13 +63,14 @@ public class StudentDetail extends JFrame {
         JRadioButton maleRadioButton = new JRadioButton("Male");
         JRadioButton femaleRadioButton = new JRadioButton("Female");
         ButtonGroup genderGroup = new ButtonGroup();
-
         genderPanel.add(maleRadioButton);
         genderPanel.add(femaleRadioButton);
         genderGroup.add(maleRadioButton);
         genderGroup.add(femaleRadioButton);
         courseComboBox = new JComboBox<>(new String[] { "Web Application Developer", "Database Administrator",
                 "Network Administrator", "Windows Application Developer" });
+        timeSlotComboBox = new JComboBox<>(new String[] { "7:00 - 9:00", "9:00 - 11:00", "11:00 - 1:00", "1:00 - 3:00",
+                "3:00 - 5:00" });
         JPanel facilitiesPanel = new JPanel();
         JCheckBox ComputerDromeCheckBox = new JCheckBox("Computer Drome");
         JCheckBox libraryCheckBox = new JCheckBox("Library");
@@ -77,7 +81,7 @@ public class StudentDetail extends JFrame {
         closeButton = new JButton("Close");
 
         // Set the layout manager
-        setLayout(new GridLayout(7, 2));
+        setLayout(new GridLayout(8, 2));
 
         // Add components to the frame
         add(nameLabel);
@@ -90,6 +94,8 @@ public class StudentDetail extends JFrame {
         add(genderPanel);
         add(courseLabel);
         add(courseComboBox);
+        add(timeSlotLabel);
+        add(timeSlotComboBox);
         add(facilitiesLabel);
         add(facilitiesPanel);
         add(okButton);

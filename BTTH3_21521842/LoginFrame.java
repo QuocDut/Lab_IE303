@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class LoginFrame extends JFrame {
     private JLabel usernameLabel;
