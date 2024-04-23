@@ -2,7 +2,6 @@ package BTTH3_21521842.A;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,11 +15,11 @@ import java.util.List;
 
 public class StudentManagementFrame extends JFrame {
     private List<Statement> students = new ArrayList<>();
-    private JTable studentTable;
+    private JTable studentTable = new JTable();
     private JTextField idField, nameField, dateField;
     private JButton addButton, saveButton, editButton, deleteButton, openFileButton, saveFileButton, cancelButton,
             exitButton;
-    protected Student[] student;
+    protected Student[] student = new Student[0];
 
     public StudentManagementFrame() {
         students = new ArrayList<>();
@@ -132,6 +131,12 @@ public class StudentManagementFrame extends JFrame {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(null, "Error saving students");
                 }
+                // Clear the input fields
+                idField.setText("");
+                nameField.setText("");
+                dateField.setText("");
+                // Show success message
+                JOptionPane.showMessageDialog(null, "Students saved successfully");
             }
         });
 
@@ -139,6 +144,30 @@ public class StudentManagementFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Edit student logic
+                int selectedRow = studentTable.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select a student to edit");
+                    return;
+                }
+                // Get the student object from the selected row
+                Student student = new Student(
+                        (String) studentTable.getValueAt(selectedRow, 0),
+                        (String) studentTable.getValueAt(selectedRow, 1),
+                        (String) studentTable.getValueAt(selectedRow, 2));
+                // Update the student object
+                student.setId(idField.getText());
+                student.setName(nameField.getText());
+                student.setDate(dateField.getText());
+                // Update the table
+                DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
+                model.setValueAt(idField.getText(), selectedRow, 0);
+                model.setValueAt(nameField.getText(), selectedRow, 1);
+                model.setValueAt(dateField.getText(), selectedRow, 2);
+                // Clear the input fields
+                idField.setText("");
+                nameField.setText("");
+                dateField.setText("");
+
             }
         });
 
@@ -151,7 +180,6 @@ public class StudentManagementFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "Please select a student to delete");
                     return;
                 }
-
                 // Get the student object from the selected row
                 Statement student = students.get(selectedRow);
 
@@ -161,6 +189,13 @@ public class StudentManagementFrame extends JFrame {
                 // Remove the row from the table
                 DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
                 model.removeRow(selectedRow);
+                // Clear the input fields
+                idField.setText("");
+                nameField.setText("");
+                dateField.setText("");
+                // Show success message
+                JOptionPane.showMessageDialog(null, "Student deleted successfully");
+
             }
         });
 
@@ -209,10 +244,11 @@ public class StudentManagementFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Cancel logic
-                JOptionPane.showMessageDialog(null, "Operation cancelled");
                 idField.setText("");
                 nameField.setText("");
                 dateField.setText("");
+                // Show success message
+                JOptionPane.showMessageDialog(null, "Operation cancelled");
             }
         });
 
@@ -221,14 +257,25 @@ public class StudentManagementFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Exit logic
                 System.exit(0);
+                // Show success message
+                JOptionPane.showMessageDialog(null, "Goodbye!");
             }
         });
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            // Create and show the frame
             StudentManagementFrame frame = new StudentManagementFrame();
+            frame.pack();
+            // frame.setSize(300, 400);
+            frame.setLocationRelativeTo(null);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setResizable(false);
+            frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+            // Show success message
+            JOptionPane.showMessageDialog(null, "Welcome to Student Management System");
         });
     }
 }

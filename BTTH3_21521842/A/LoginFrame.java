@@ -66,20 +66,39 @@ public class LoginFrame extends JFrame {
         String password = passwordTextField.getText();
 
         if (username.equals("Adminuser") && password.equals("admin")) {
-            // Open the StudentDetail frame
+            // Open the StudentDetail
+            new StudentDetail();
+            this.dispose();
+            // Close the LoginFrame
+            this.dispose();
+            // Display a message
+            JOptionPane.showMessageDialog(this, "Login successful.");
+            // Close the LoginFrame
+            this.dispose();
         } else {
             int attemptCount = 0;
             attemptCount++;
             if (attemptCount > 3) {
+                // Display a message
                 JOptionPane.showMessageDialog(this, "Too many failed attempts. Closing the application.");
+                // Close the LoginFrame
+                this.dispose();
+                // Exit the application
                 System.exit(0);
             } else {
+                // Display a message
                 JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
+                // Clear the text fields
+                usernameTextField.setText("username");
+                passwordTextField.setText("password");
             }
         }
     }
 
     public static void main(String[] args) {
+        // Create the frame on the event dispatching thread
         SwingUtilities.invokeLater(() -> new LoginFrame());
+        new LoginFrame();
+
     }
 }
